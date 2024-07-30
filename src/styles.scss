@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+$roboto-font-path: "roboto-fontface/fonts" !default;
+@import "roboto-fontface/css/roboto/sass/roboto-fontface";
+
+$material-icons-font-path: 'material-icons/iconfont/';
+@import 'material-icons/iconfont/material-icons.scss';
+
+@import 'colors';
+
+* {
+  font-family: 'roboto';
+}
+
+body {
+  background-color: $color-three;
+}
+
+.btn-primary {
+  --bs-btn-bg: #{$color-two};
+  --bs-btn-hover-bg: #{$color-one};
+  --bs-btn-hover-border-color: #{$color-one};
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #{$color-two};
+  --bs-btn-border-color: #{$color-two};
+  --bs-btn-hover-bg: #{$color-one};
+  --bs-btn-hover-border-color: #{$color-one};
+}
+
+.text-bg-success {
+  background-color: #{$color-eight} !important;
+}

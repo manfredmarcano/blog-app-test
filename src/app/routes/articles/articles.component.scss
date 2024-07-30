@@ -1,0 +1,34 @@
+.list {
+  display: grid;
+	grid-gap: 40px;
+
+  article {
+    height: 439px;
+  }
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat( 2, 1fr );
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat( 3, 1fr );
+  }
+
+  // `sm` applies to x-small devices (portrait phones, less than 576px)
+  @media (max-width: 575.98px) {
+    grid-gap: 1rem;
+  }
+}
+
+.load-more-button {
+  position: relative;
+  font-weight: 900;
+  font-size: 17px;
+  
+  > span {
+    vertical-align: middle;
+    font-size: 30px;
+    position: absolute;
+    right: 20px;
+  }
+}

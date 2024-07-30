@@ -1,0 +1,26 @@
+<!-- Articles list -->
+<div class="container" *ngIf="(posts$ | async)?.length">
+  <div class="list">
+    <article *ngFor="let post of posts$ | async;">
+      <app-article-item [data]="post"/>
+    </article>
+  </div>
+</div>
+
+<!-- Load More button -->
+<div class="container mt-4" *ngIf="!(loading$ | async) && !(hasPaginationFinished$ | async)">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="d-grid">
+        <button type="button" class="btn btn-outline-primary btn-lg load-more-button" (click)="loadMorePosts()">Load more<span class="material-icons">arrow_right_alt</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Spinner -->
+<div class="container text-center my-3" *ngIf="(loading$ | async)">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>

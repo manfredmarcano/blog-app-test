@@ -1,0 +1,22 @@
+@import 'colors';
+
+.navbar {
+    --bs-navbar-padding-y: .844rem;
+
+    .navbar-nav {
+        --bs-nav-link-font-weight: 900;
+        --bs-nav-link-color: #{$color-one};
+        --bs-nav-link-hover-color: #{$color-two};
+
+        .nav-item {
+            .nav-link {
+                // font-weight: 900;
+                // color: $color-one;
+    
+                &.active {
+                    color: $color-two;
+                }
+            }
+        }
+    }
+}

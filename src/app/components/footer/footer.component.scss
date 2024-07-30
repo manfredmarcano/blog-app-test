@@ -1,0 +1,33 @@
+@import 'colors';
+
+:host {
+    background-color: $color-three;
+    display: flex;
+    // position: fixed;
+    // bottom: 0;
+    width: 100%;
+}
+
+footer {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    p {
+        font-weight: 400;
+        font-size: 17px;
+        color: #000000;
+
+        // `sm` applies to x-small devices (portrait phones, less than 576px)
+        @media (max-width: 575.98px) {
+            font-size: 12px;
+        }
+    }
+
+    // `sm` applies to x-small devices (portrait phones, less than 576px)
+    @media (max-width: 575.98px) {
+        height: 40px;
+    }
+}

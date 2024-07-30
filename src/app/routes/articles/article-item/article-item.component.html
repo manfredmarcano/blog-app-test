@@ -1,0 +1,14 @@
+<div class="image" [ngStyle]="{'background-image': 'url(' + data.image + ')'}">
+    <div class="slope"></div>
+    <span class="badge rounded-pill text-bg-success price">${{ data.monthlyPrice }}/MO</span>
+    <span class="material-icons star favorite">star</span>
+</div>
+<div class="title">{{ data.title }}</div>
+<div class="content">{{ data.content }}</div>
+<div class="metadata">
+    <div class="metadata__author-photo">
+        <img [src]="data.author.avatar" />
+    </div>
+    <div class="metadata__author-name">{{ data.author.name }}</div>
+    <div class="metadata__date">{{ data.datetime | date: 'MMM dd' }}</div>
+</div>
