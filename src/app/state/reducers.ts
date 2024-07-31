@@ -33,7 +33,6 @@ export function reducer(state: State | undefined, action: Action) {
 const blogAppReducer = createReducer(
   initialState,
   on(BlogActions.loadPosts, state => ({ ...state, loading: true })),
-  // on(BlogActions.loadPostsSuccess, (state, { posts }) =>({ ...state, posts, auxPosts: posts, loading: false, postsCount: posts.length })),
   on(BlogActions.loadPostsSuccess, (state, { posts }) =>({
     ...state,
     posts: state.auxPosts.concat(posts),
@@ -44,19 +43,10 @@ const blogAppReducer = createReducer(
     hasPaginationFinished: posts.length < state.limit,
   })),
   on(BlogActions.loadPostsFailure, (state, { error }) => ({ ...state, error, loading: false })),
-
-
-  /* on(BlogActions.loadMorePosts, state => ({ ...state, loading: true })),
-  on(BlogActions.loadMorePostsSuccess, (state, { posts }) =>({
+  on(BlogActions.searchPosts, state => ({ ...state, loading: true })),
+  on(BlogActions.searchPostsSuccess, (state, { search }) => ({
     ...state,
-    posts: state.auxPosts.concat(state.posts),
-    auxPosts: state.auxPosts.concat(state.posts),
-    loading: false, postsCount: posts.length,
-  })),
-  on(BlogActions.loadMorePostsFailure, (state, { error }) => ({ ...state, error, loading: false })), */
-
-  on(BlogActions.searchPosts, (state, { search }) => ({
-    ...state,
+    loading: false,
     posts: state.auxPosts.filter((post: IPost) =>
       post.title.toUpperCase().includes(search.toUpperCase()) ||
       post.content.toUpperCase().includes(search.toUpperCase()) ||
@@ -64,5 +54,4 @@ const blogAppReducer = createReducer(
       post.monthlyPrice.toString().includes(search.toUpperCase())
     ),
   })),
-
 );

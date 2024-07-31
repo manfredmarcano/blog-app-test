@@ -11,4 +11,7 @@ export class ArticleItemComponent {
   @Input()
   data!: IPost;
 
+  titleLength: number = 50;
+  contentLength: number = 100;
+
 }

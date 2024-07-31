@@ -1,10 +1,17 @@
 <div class="image" [ngStyle]="{'background-image': 'url(' + data.image + ')'}">
     <div class="slope"></div>
     <span class="badge rounded-pill text-bg-success price">${{ data.monthlyPrice }}/MO</span>
-    <span class="material-icons star favorite">star</span>
+    <span class="material-icons star favoriteNO">star</span>
 </div>
-<div class="title">{{ data.title }}</div>
-<div class="content">{{ data.content }}</div>
+<div class="title">
+    <ng-container *ngIf="(data.title | truncate: titleLength: '') === data.title; else ellipsis">
+        {{ data.title | truncate: titleLength: '' }}
+    </ng-container>
+    <ng-template #ellipsis>
+        {{ data.title | truncate: titleLength: '' }} <span placement="top right" [ngbTooltip]="data.title">[...]</span>
+    </ng-template>    
+</div>
+<div class="content">{{ data.content | truncate: contentLength }}</div>
 <div class="metadata">
     <div class="metadata__author-photo">
         <img [src]="data.author.avatar" />

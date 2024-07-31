@@ -29,7 +29,6 @@
         padding: 0;
         margin: 0 8px 0 8px;
         border: 0;
-        // background-color: red; // QUITAR
 
         &::-ms-input-placeholder { /* Edge 12-18 */
             color: $color-five;
@@ -43,6 +42,10 @@
 
         &:focus {
             outline: none;
+        }
+
+        &:disabled {
+            background-color: #FFFFFF;
         }
 
         // `sm` applies to x-small devices (portrait phones, less than 576px)

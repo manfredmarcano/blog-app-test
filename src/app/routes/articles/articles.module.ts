@@ -3,18 +3,22 @@ import { CommonModule } from '@angular/common';
 import { ArticlesComponent } from './articles.component';
 import { ArticlesRoutingModule } from './articles-routing.module';
 import { ArticleComponent } from './article/article.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ArticleItemComponent } from './article-item/article-item.component';
+import { TruncatePipe } from '../../pipes/truncate.pipe';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [ArticlesComponent, ArticleComponent, ArticleItemComponent],
+  declarations: [
+    ArticlesComponent,
+    ArticleComponent,
+    ArticleItemComponent,
+    TruncatePipe,
+  ],
   imports: [
     CommonModule,
     ArticlesRoutingModule,
-    // NgbModule,
+    NgbTooltipModule,
   ],
-  exports: [
-    // ArticlesComponent
-  ]
+  exports: []
 })
 export class ArticlesModule { }

@@ -22,4 +22,5 @@ export class DataService {
   getData(): Observable<IPost[]> {
     return this.http.get<IPost[]>(`${this._apiUrl}/posts${this._pagination}`);
   }
+
 }

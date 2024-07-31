@@ -1,7 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Selectors, State } from '../../state';
-import { debounceTime, exhaustMap, Observable, of, pipe, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BlogActions } from '../../state/actions';
 
 @Component({
@@ -11,10 +11,12 @@ import { BlogActions } from '../../state/actions';
 })
 export class SearcherComponent {
   postsCount$: Observable<number>;
+  isLoading$: Observable<boolean>;
   searchInput: string = '';
 
   constructor(private store: Store<State>) {
     this.postsCount$ = this.store.select(Selectors.getPostsCount);
+    this.isLoading$ = this.store.select(Selectors.isLoading);
   }
 
   search(): void {
