@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Selectors, State } from '../../state';
 
 @Component({
@@ -11,6 +11,9 @@ import { Selectors, State } from '../../state';
 export class HeaderComponent {
   isCollapsed = true;
   routerLinkActiveOptions = { exact: true };
+  isLoggedIn$: Observable<boolean>
 
-  constructor(private store: Store<State>) { }
+  constructor(private store: Store<State>) {
+    this.isLoggedIn$ = this.store.select(Selectors.getToken).pipe(map((token: string | null) => !!token));
+  }
 }

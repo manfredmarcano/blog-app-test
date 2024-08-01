@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IPost } from '../models/data.model';
+import { IDataBase, IPost } from '../models/data.model';
 import { Selectors, State } from '../state';
 import { Store } from '@ngrx/store';
 
@@ -21,6 +21,10 @@ export class DataService {
 
   getData(): Observable<IPost[]> {
     return this.http.get<IPost[]>(`${this._apiUrl}/posts${this._pagination}`);
+  }
+
+  getDataBaseData(): Observable<IDataBase> {
+    return this.http.get<IDataBase>(`${this._apiUrl}/db`);
   }
 
 }

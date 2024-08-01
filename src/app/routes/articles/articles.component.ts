@@ -19,7 +19,6 @@ export class ArticlesComponent {
     this.posts$ = this.store.select(Selectors.getAllPosts);
     this.loading$ = this.store.select(Selectors.isLoading);
     this.hasPaginationFinished$ = this.store.select(Selectors.hasPaginationFinished);
-    this.store.dispatch(BlogActions.loadPosts());
   }
 
   loadMorePosts(): void {

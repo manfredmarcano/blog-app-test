@@ -1,9 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { IPost } from '../models/data.model';
+import { IDataBase, IDataBaseFavorites, IDataBaseUser, IPost } from '../models/data.model';
 import { BlogActions } from './actions';
 
 export interface State {
   posts: IPost[];
+  auxFavoritesPosts: IPost[];
+  favoritesPosts: IPost[];
   auxPosts: IPost[];
   loading: boolean;
   error: string;
@@ -11,12 +13,17 @@ export interface State {
   page: number;
   limit: number;
   hasPaginationFinished: boolean;
+  db: IDataBase;
+  token: string | null;
+  view: string;
 }
 
 export const getState = (state: State) => { return state; };
 
 export const initialState: State = {
   posts: [],
+  auxFavoritesPosts: [],
+  favoritesPosts: [],
   auxPosts: [],
   loading: false,
   error: '',
@@ -24,6 +31,12 @@ export const initialState: State = {
   page: 1,
   limit: 6,
   hasPaginationFinished: true,
+  db: {
+    users: [],
+    favorites: [],
+  },
+  token: null,
+  view: '',
 };
 
 export function reducer(state: State | undefined, action: Action) {
@@ -33,7 +46,7 @@ export function reducer(state: State | undefined, action: Action) {
 const blogAppReducer = createReducer(
   initialState,
   on(BlogActions.loadPosts, state => ({ ...state, loading: true })),
-  on(BlogActions.loadPostsSuccess, (state, { posts }) =>({
+  on(BlogActions.loadPostsSuccess, (state, { posts }) => ({
     ...state,
     posts: state.auxPosts.concat(posts),
     auxPosts: state.auxPosts.concat(posts),
@@ -54,4 +67,28 @@ const blogAppReducer = createReducer(
       post.monthlyPrice.toString().includes(search.toUpperCase())
     ),
   })),
+  on(BlogActions.loadDBDataSuccess, (state, { db }) =>({ ...state, db })),
+  on(BlogActions.loadDBDataFailure, (state, { error }) => ({ ...state, error })),
+  on(BlogActions.loginSuccess, (state, { token }) => ({
+    ...state,
+    token,
+    auxFavoritesPosts:
+      state.auxPosts.filter((post: IPost) => 
+        state.db.favorites
+        .find((userFavorites: IDataBaseFavorites) => 
+          +userFavorites.user === state.db.users.find((user: IDataBaseUser) => user.email.toUpperCase() === token.toUpperCase())?.id
+        )?.posts
+        .includes(+post.id)
+      ),
+    favoritesPosts:
+      state.auxPosts.filter((post: IPost) => 
+        state.db.favorites
+        .find((userFavorites: IDataBaseFavorites) => 
+          +userFavorites.user === state.db.users.find((user: IDataBaseUser) => user.email.toUpperCase() === token.toUpperCase())?.id
+        )?.posts
+        .includes(+post.id)
+      )
+  })),
+
+  on(BlogActions.changedView, (state, { view }) =>({ ...state, view })),
 );

@@ -1,0 +1,8 @@
+<!-- Articles list -->
+<div class="container" *ngIf="(favoritesPosts$ | async)?.length">
+  <div class="list">
+    <article *ngFor="let post of favoritesPosts$ | async;">
+      <app-article-item [data]="post"/>
+    </article>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotFoundComponent } from './routes/not-found/not-found.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -14,12 +15,19 @@ const routes: Routes = [
     loadChildren: () =>
       import('./routes/articles/articles.module').then(m => m.ArticlesModule),
   },
-  { path: 'not-found', component: NotFoundComponent },
-  { path: '**', redirectTo: 'not-found' },
+  {
+    path: 'favorites',
+    // component: NotFoundComponent,
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./routes/favorites/favorites.module').then(m => m.FavoritesModule),
+  },
+  // { path: '**', redirectTo: 'not-found' },
+  { path: '**', redirectTo: 'favorites' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), NgbCollapseModule], // { enableTracing: true }
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
