@@ -13,7 +13,7 @@ export class SearcherComponent {
   postsCount$: Observable<number>;
   isLoading$: Observable<boolean>;
   searchInput: string = '';
-  // activeView$: Observable<string>;
+  showSearcher: boolean = true;
   private _currentView: string = '';
 
   constructor(private store: Store<State>) {
@@ -22,6 +22,8 @@ export class SearcherComponent {
 
     this.store.select(Selectors.getActiveView).subscribe((view: string) => {
       this._currentView = view;
+      const isArticleDetails: boolean = (/^articles\/[0-9]+$/i).test(view);
+      this.showSearcher = !isArticleDetails;
       this.searchInput = '';
     });
   }

@@ -30,12 +30,19 @@ export class BlogEffects {
     ),
   );
 
+  loadPostsSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.loadPostsSuccess),
+      map(action => BlogActions.loadDBData()),
+    ),
+  );
+
   searchPosts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BlogActions.searchPosts),
       debounceTime(500),
       switchMap(({search, view}) =>
-        of(BlogActions.searchPostsSuccess({ search }))
+        of(BlogActions.searchPostsSuccess({ search, view }))
       ),
     ),
   );

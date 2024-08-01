@@ -1,11 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { IDataBase, IDataBaseFavorites, IDataBaseUser, IPost } from '../models/data.model';
 import { BlogActions } from './actions';
+import { FAVORITES } from '../app-routing.module';
 
 export interface State {
   posts: IPost[];
   auxFavoritesPosts: IPost[];
-  favoritesPosts: IPost[];
   auxPosts: IPost[];
   loading: boolean;
   error: string;
@@ -23,7 +23,6 @@ export const getState = (state: State) => { return state; };
 export const initialState: State = {
   posts: [],
   auxFavoritesPosts: [],
-  favoritesPosts: [],
   auxPosts: [],
   loading: false,
   error: '',
@@ -57,10 +56,10 @@ const blogAppReducer = createReducer(
   })),
   on(BlogActions.loadPostsFailure, (state, { error }) => ({ ...state, error, loading: false })),
   on(BlogActions.searchPosts, state => ({ ...state, loading: true })),
-  on(BlogActions.searchPostsSuccess, (state, { search }) => ({
+  on(BlogActions.searchPostsSuccess, (state, { search, view }) => ({
     ...state,
     loading: false,
-    posts: state.auxPosts.filter((post: IPost) =>
+    posts: state[view === FAVORITES ? 'auxFavoritesPosts': 'auxPosts'].filter((post: IPost) =>
       post.title.toUpperCase().includes(search.toUpperCase()) ||
       post.content.toUpperCase().includes(search.toUpperCase()) ||
       post.author.name.toUpperCase().includes(search.toUpperCase()) ||
@@ -80,15 +79,12 @@ const blogAppReducer = createReducer(
         )?.posts
         .includes(+post.id)
       ),
-    favoritesPosts:
-      state.auxPosts.filter((post: IPost) => 
-        state.db.favorites
-        .find((userFavorites: IDataBaseFavorites) => 
-          +userFavorites.user === state.db.users.find((user: IDataBaseUser) => user.email.toUpperCase() === token.toUpperCase())?.id
-        )?.posts
-        .includes(+post.id)
-      )
   })),
 
-  on(BlogActions.changedView, (state, { view }) =>({ ...state, view })),
+  on(BlogActions.changedView, (state, { view }) =>({
+    ...state,
+    view,
+    posts: view === FAVORITES ? state.auxFavoritesPosts : state.auxPosts,
+  })),
+
 );

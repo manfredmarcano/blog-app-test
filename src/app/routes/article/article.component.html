@@ -1,1 +1,6 @@
-<h1>ARTICLE #X</h1>
+<div class="container">
+  <h1 class="title text-center mb-3">{{ data?.title }}</h1>
+  <div class="metadata text-justify mb-3">Author</div>
+  <img [src]="data?.image" class="image img-thumbnail mx-auto d-block mb-3" alt="{{ data?.title }}"/>
+  <p class="content text-justify">{{ data?.content }}</p>
+</div>

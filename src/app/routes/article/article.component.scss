@@ -1,0 +1,21 @@
+@import 'colors';
+
+.title {
+    font-size: 43;
+    line-height: 53px;
+}
+
+.image {
+    max-height: 50vh;
+}
+
+.content {
+    font-size: 17px;
+    line-height: 26px;
+}
+
+.title,
+.content {
+    color: $color-five;
+    font-weight: 900;
+}

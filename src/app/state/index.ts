@@ -5,6 +5,7 @@ import {
 } from '@ngrx/store';
 
 import * as fromReducer from './reducers';
+import { IPost } from '../models/data.model';
 
 export interface State {
   blog: fromReducer.State;
@@ -20,7 +21,7 @@ export const getStateSelector = createSelector(
 );
 
 export const Selectors = {
-  getAllPosts: createSelector(getStateSelector, (state: fromReducer.State) => state.posts),
+  getResultPosts: createSelector(getStateSelector, (state: fromReducer.State) => state.posts),
   getPostsCount: createSelector(getStateSelector, (state: fromReducer.State) => state.posts.length),
   isLoading: createSelector(getStateSelector, (state: fromReducer.State) => state.loading),
   getPagination: createSelector(getStateSelector, (state: fromReducer.State) => `?_page=${state.page}&_limit=${state.limit}`),
@@ -28,5 +29,5 @@ export const Selectors = {
   getDataBaseData: createSelector(getStateSelector, (state: fromReducer.State) => state.db),
   getToken: createSelector(getStateSelector, (state: fromReducer.State) => state.token),
   getActiveView: createSelector(getStateSelector, (state: fromReducer.State) => state.view),
-  getFavoritesPosts: createSelector(getStateSelector, (state: fromReducer.State) => state.favoritesPosts),
+  getPostData: (id: number | string) => createSelector(getStateSelector, (state: fromReducer.State) => state.auxPosts.find((post: IPost) => +post.id === +id) || null ),
 }

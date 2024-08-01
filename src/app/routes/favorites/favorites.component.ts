@@ -14,7 +14,7 @@ export class FavoritesComponent {
   favoritesPosts$: Observable<IPost[]>;
 
   constructor(private store: Store<State>) {
-    this.favoritesPosts$ = this.store.select(Selectors.getFavoritesPosts);
+    this.favoritesPosts$ = this.store.select(Selectors.getResultPosts);
   }
 
 }

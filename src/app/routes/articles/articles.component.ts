@@ -16,7 +16,7 @@ export class ArticlesComponent {
   hasPaginationFinished$: Observable<boolean>;
 
   constructor(private store: Store<State>) {
-    this.posts$ = this.store.select(Selectors.getAllPosts);
+    this.posts$ = this.store.select(Selectors.getResultPosts);
     this.loading$ = this.store.select(Selectors.isLoading);
     this.hasPaginationFinished$ = this.store.select(Selectors.hasPaginationFinished);
   }
