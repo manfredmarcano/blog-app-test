@@ -2,7 +2,7 @@
 <div class="container" *ngIf="(posts$ | async)?.length">
   <div class="list">
     <article *ngFor="let post of posts$ | async;">
-      <app-article-item [data]="post"/>
+      <app-article-item [data]="post" [favorites]="(getFavoritesPostsIds$ | async) || []" />
     </article>
   </div>
 </div>

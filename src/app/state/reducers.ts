@@ -80,11 +80,16 @@ const blogAppReducer = createReducer(
         .includes(+post.id)
       ),
   })),
-
   on(BlogActions.changedView, (state, { view }) =>({
     ...state,
     view,
     posts: view === FAVORITES ? state.auxFavoritesPosts : state.auxPosts,
   })),
-
+  on(BlogActions.toggleFavorite, (state, { id }) =>({
+    ...state,
+    posts: state.view === FAVORITES ? state.posts.filter((post: IPost) => post.id !== id): state.posts,
+    auxFavoritesPosts: !!state.auxFavoritesPosts.find((post: IPost) => post.id === id)
+      ? state.auxFavoritesPosts.filter((post: IPost) => post.id !== id)
+      : state.auxFavoritesPosts.concat(state.auxPosts.filter((post: IPost) => post.id === id))
+  })),
 );

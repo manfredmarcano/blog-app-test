@@ -10,11 +10,12 @@ import { IPost } from '../../models/data.model';
   styleUrl: './favorites.component.scss'
 })
 export class FavoritesComponent {
-
   favoritesPosts$: Observable<IPost[]>;
+  getFavoritesPostsIds$: Observable<(string | number)[]>;
 
   constructor(private store: Store<State>) {
     this.favoritesPosts$ = this.store.select(Selectors.getResultPosts);
+    this.getFavoritesPostsIds$ = this.store.select(Selectors.getFavoritesPostsIds);
   }
 
 }

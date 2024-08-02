@@ -26,6 +26,12 @@ export class SearcherComponent {
       this.showSearcher = !isArticleDetails;
       this.searchInput = '';
     });
+
+    this.store.select(Selectors.hasPaginationFinished).subscribe((val: boolean) => {
+      if (val) {
+        this.searchInput = '';
+      }
+    });
   }
 
   search(): void {

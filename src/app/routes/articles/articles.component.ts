@@ -14,11 +14,13 @@ export class ArticlesComponent {
   posts$: Observable<IPost[]>;
   loading$: Observable<boolean>;
   hasPaginationFinished$: Observable<boolean>;
+  getFavoritesPostsIds$: Observable<(string | number)[]>;
 
   constructor(private store: Store<State>) {
     this.posts$ = this.store.select(Selectors.getResultPosts);
     this.loading$ = this.store.select(Selectors.isLoading);
     this.hasPaginationFinished$ = this.store.select(Selectors.hasPaginationFinished);
+    this.getFavoritesPostsIds$ = this.store.select(Selectors.getFavoritesPostsIds);
   }
 
   loadMorePosts(): void {

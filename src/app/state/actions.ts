@@ -13,6 +13,7 @@ const login = createAction('[Login] User Login', props<{ email: string, password
 const loginSuccess = createAction('[Login] Login Success', props<{ token: string }>());
 const loginFailure = createAction('[Login] Login Failure', props<{ error: string }>());
 const changedView = createAction('[View] Changed', props<{ view: string }>());
+const toggleFavorite = createAction('[Posts] Toggle Favorite', props<{ id: number }>());
 
 export const BlogActions = {
   loadPosts, loadPostsSuccess, loadPostsFailure,
@@ -20,4 +21,5 @@ export const BlogActions = {
   loadDBData, loadDBDataSuccess, loadDBDataFailure,
   login, loginSuccess, loginFailure,
   changedView,
+  toggleFavorite,
 };
