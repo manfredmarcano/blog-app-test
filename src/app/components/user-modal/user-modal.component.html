@@ -1,0 +1,71 @@
+<ng-template #content let-modal>
+	<!-- <div class="modal-header">
+		<h4 class="modal-title">Modal title</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div> -->
+	<div class="modal-body">
+
+
+
+    	<!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+		<h1 *ngIf="isLogin">LOGIN</h1>
+		<h1 *ngIf="!isLogin">SIGNUP</h1> -->
+
+		<div class="container">
+			<div class="row">
+			  <div class="col image d-none d-lg-flex"></div>
+
+			  <div class="col">
+
+          <div class="container px-4 py-5">
+            <h1 *ngIf="isLogin" class="title text-center">Sign In</h1>
+            <h1 *ngIf="!isLogin" class="title text-center">Sign Up</h1>
+            <h6 class="subtitle text-center mb-4" ngbAutofocus>Simplify your reading in minutes.</h6>
+  
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  
+              <div class="form-floating mb-3">
+                <input
+                  type="email" class="form-control is-invalid"
+                  id="emailInput" placeholder="" formControlName="email"
+                  [ngClass]="{ 'is-invalid': f['email'].errors && (f['email'].dirty || f['email'].touched) }"
+                >
+                <label for="emailInput">Your email</label>
+              </div>
+  
+              <div class="form-floating mb-3" *ngIf="!isLogin">
+                <input type="text" class="form-control" id="fullnameInput" placeholder="" formControlName="fullname">
+                <label for="fullnameInput">Full Name</label>
+              </div>
+  
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="passwordInput" placeholder="" formControlName="password">
+                <label for="passwordInput">Password</label>
+              </div>
+  
+              <div class="d-grid">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!userForm.valid"
+                >
+                  Sign <ng-container *ngIf="isLogin">In</ng-container><ng-container *ngIf="!isLogin">Up</ng-container>
+                </button>
+              </div>
+  
+            </form>
+
+          </div>
+
+
+
+			  </div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="modal-footer">
+		<button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
+	</div> -->
+</ng-template>
+
+<!-- <button class="btn btn-outline-primary mb-2 me-2" (click)="openLg(content)">Large modal</button> -->

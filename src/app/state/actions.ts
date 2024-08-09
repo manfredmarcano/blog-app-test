@@ -1,4 +1,4 @@
-import { IDataBase, IPost } from '../models/data.model';
+import { IDataBase, IPost, TOAST } from '../models/data.model';
 import { createAction, props } from '@ngrx/store';
 
 const loadPosts = createAction('[Posts] Load Posts');
@@ -14,6 +14,8 @@ const loginSuccess = createAction('[Login] Login Success', props<{ token: string
 const loginFailure = createAction('[Login] Login Failure', props<{ error: string }>());
 const changedView = createAction('[View] Changed', props<{ view: string }>());
 const toggleFavorite = createAction('[Posts] Toggle Favorite', props<{ id: number }>());
+const toggleUserModal = createAction('[View] Toggle User Modal', props<{ isLogin: boolean }>() );
+const displayToast = createAction('[View] Display Toast', props<{ toastType: TOAST, title: string, description: string }>() );
 
 export const BlogActions = {
   loadPosts, loadPostsSuccess, loadPostsFailure,
@@ -22,4 +24,6 @@ export const BlogActions = {
   login, loginSuccess, loginFailure,
   changedView,
   toggleFavorite,
+  toggleUserModal,
+  displayToast,
 };

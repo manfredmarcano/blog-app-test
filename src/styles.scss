@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+// $input-height-border: 6px;
+
+$form-floating-height: 50px;
+$form-floating-padding-y: 12px;
+$form-floating-padding-x: 20px;
+$input-font-size: 14px;
+
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 
@@ -10,6 +17,9 @@ $material-icons-font-path: 'material-icons/iconfont/';
 @import 'material-icons/iconfont/material-icons.scss';
 
 @import 'colors';
+
+// regular style toast
+@import 'ngx-toastr/toastr';
 
 * {
   font-family: 'roboto';
@@ -34,4 +44,21 @@ body {
 
 .text-bg-success {
   background-color: #{$color-eight} !important;
+}
+
+.form-floating {
+  > label {
+    color: $color-four;
+    font-weight: 900;
+    font-size: 17px;
+  }
+
+  > .form-control:focus,
+  > .form-control:not(:placeholder-shown),
+  > .form-control-plaintext,
+  > .form-select {
+    ~ label {
+      color: $color-four;
+    }
+  }
 }

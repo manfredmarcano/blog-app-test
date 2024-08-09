@@ -16,6 +16,7 @@ export interface State {
   db: IDataBase;
   token: string | null;
   view: string;
+  modalOpen: { status: boolean, isLogin: boolean }
 }
 
 export const getState = (state: State) => { return state; };
@@ -36,6 +37,7 @@ export const initialState: State = {
   },
   token: null,
   view: '',
+  modalOpen: { status: false, isLogin: false },
 };
 
 export function reducer(state: State | undefined, action: Action) {
@@ -91,5 +93,9 @@ const blogAppReducer = createReducer(
     auxFavoritesPosts: !!state.auxFavoritesPosts.find((post: IPost) => post.id === id)
       ? state.auxFavoritesPosts.filter((post: IPost) => post.id !== id)
       : state.auxFavoritesPosts.concat(state.auxPosts.filter((post: IPost) => post.id === id))
+  })),
+  on(BlogActions.toggleUserModal, (state, { isLogin }) =>({
+    ...state,
+    modalOpen: { status: !state.modalOpen.status, isLogin },
   })),
 );

@@ -25,7 +25,7 @@ export class AppComponent {
     // QUITAR
     this.store.select(Selectors.getDataBaseData).pipe(skip(1)).subscribe(data => {
       console.log('DB: ', data);
-      this.store.dispatch(BlogActions.login({ email: 'manfredalberto@gmail.com', password: '123'})); // 3
+      // this.store.dispatch(BlogActions.login({ email: 'manfredalberto@gmail.comM', password: '123'})); // 3
     });
 
     // QUITAR 

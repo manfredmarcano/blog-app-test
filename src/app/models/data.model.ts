@@ -28,3 +28,5 @@ export interface IDataBase {
   favorites: IDataBaseFavorites[]
   users: IDataBaseUser[];
 }
+
+export type TOAST = "success" | "error" | "warning";

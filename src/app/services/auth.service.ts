@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   // Login simulation
-  isUserInDataBase(db: IDataBase, email: string): boolean {
+  isUserInDataBase(db: IDataBase, email: string, password: string): boolean {
     return !!db.users.find((user: IDataBaseUser) => user.email.toUpperCase() === email.toUpperCase());
   }
 

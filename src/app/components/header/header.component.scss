@@ -10,8 +10,7 @@
 
         .nav-item {
             .nav-link {
-                // font-weight: 900;
-                // color: $color-one;
+                cursor: pointer;
     
                 &.active {
                     color: $color-two;

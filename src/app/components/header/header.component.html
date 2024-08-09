@@ -4,7 +4,7 @@
       <img src="assets/images/logo.png" alt="Landkit">
     </a>
 
-    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarSupportedContent"><!-- data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" -->
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -17,19 +17,22 @@
           <a class="nav-link" aria-current="page" routerLink="/favorites" routerLinkActive="active">Favorites</a>
         </li>
       </ul>
-      <!-- <form class="d-flex" role="search"> -->
       <div class="d-flex">
-        <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button> -->
         <ul class="navbar-nav me-auto mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Sign Up</a>
-          </li>
+          <ng-container *ngIf="!(isLoggedIn$ | async); else logout">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" (click)="openModal(true)">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" (click)="openModal()">Sign Up</a>
+            </li>
+          </ng-container>
+          <ng-template #logout>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Logout</a>
+            </li>
+          </ng-template>
         </ul>
-      <!-- </form> -->
       </div>
     </div>
   </div>

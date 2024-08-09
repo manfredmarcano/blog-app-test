@@ -31,4 +31,5 @@ export const Selectors = {
   getActiveView: createSelector(getStateSelector, (state: fromReducer.State) => state.view),
   getPostData: (id: number | string) => createSelector(getStateSelector, (state: fromReducer.State) => state.auxPosts.find((post: IPost) => +post.id === +id) || null ),
   getFavoritesPostsIds: createSelector(getStateSelector, (state: fromReducer.State) => state.auxFavoritesPosts.map((post: IPost) => post.id)),
+  isModalOpen: createSelector(getStateSelector, (state: fromReducer.State) => state.modalOpen),
 }
